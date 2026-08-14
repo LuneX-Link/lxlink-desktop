@@ -1,0 +1,12 @@
+.presence-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--color-background, #111318);
+  border-radius: 999px;
+  background: #737982;
+
+  &--online { background: #23a55a; }
+  &--away { background: #f0b232; }
+  &--offline { background: #737982; }
+}

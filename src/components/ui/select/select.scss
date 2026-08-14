@@ -1,0 +1,160 @@
+@use "../../../scss/globals.scss";
+
+// Portal-based select, same behaviour as the settings device dropdown but
+// reusable and with a readable type scale for the search filters.
+.aselect {
+  position: relative;
+  width: 100%;
+
+  &__trigger {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    border: 1px solid globals.$border-color;
+    border-radius: globals.$radius-sm;
+    background: rgba(255, 255, 255, 0.03);
+    color: globals.$light-color;
+    font: inherit;
+    font-size: 12px;
+    text-align: left;
+    cursor: pointer;
+    transition: border-color globals.$transition-fast, background globals.$transition-fast;
+
+    &:hover:not(:disabled) {
+      border-color: rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    &--open {
+      border-color: rgba(globals.$cyan-color, 0.45);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    &:disabled {
+      opacity: globals.$disabled-opacity;
+      cursor: not-allowed;
+    }
+  }
+
+  &__trigger-icon {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    color: globals.$body-color;
+  }
+
+  &__trigger-leading {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+  }
+
+  &__value {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &--placeholder { color: globals.$body-color; }
+  }
+
+  &__chevron {
+    flex-shrink: 0;
+    color: globals.$body-color;
+    transition: transform globals.$transition-fast;
+
+    &--open { transform: rotate(180deg); }
+  }
+
+  &__menu {
+    position: fixed;
+    z-index: 10040;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 4px;
+    border: 1px solid globals.$border-color;
+    border-radius: globals.$radius-md;
+    background: #070707;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.65);
+    animation: aselect-in 130ms ease-out;
+
+    &::-webkit-scrollbar { width: 4px; }
+    &::-webkit-scrollbar-track { background: transparent; }
+    &::-webkit-scrollbar-thumb { border-radius: 2px; background: rgba(255, 255, 255, 0.09); }
+  }
+
+  &__option {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 9px;
+    padding: 7px 9px;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: globals.$body-color;
+    font: inherit;
+    font-size: 12.5px;
+    text-align: left;
+    cursor: pointer;
+    transition: color globals.$transition-fast, background globals.$transition-fast;
+
+    &:hover:not(&--disabled) {
+      color: globals.$light-color;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    &--active { color: globals.$light-color; }
+
+    &--disabled {
+      opacity: globals.$disabled-opacity;
+      cursor: not-allowed;
+    }
+  }
+
+  &__option-leading {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+  }
+
+  &__option-copy {
+    display: flex;
+    flex: 1;
+    min-width: 0;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  &__option-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__option-hint {
+    overflow: hidden;
+    color: rgba(globals.$body-color, 0.65);
+    font-size: 10.5px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__option-check {
+    flex-shrink: 0;
+    color: globals.$cyan-color;
+  }
+}
+
+@keyframes aselect-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aselect__menu { animation-duration: 1ms; }
+}

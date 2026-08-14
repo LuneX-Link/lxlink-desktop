@@ -1,0 +1,220 @@
+@use "../../scss/globals.scss";
+
+.attachment {
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  max-width: 520px;
+  border: 1px solid globals.$border-color;
+  border-radius: globals.$radius-sm;
+  background: rgba(255, 255, 255, 0.02);
+  text-decoration: none;
+  transition: border-color globals.$transition-fast, background globals.$transition-fast;
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 9px;
+    min-width: 0;
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    width: 32px;
+    height: 32px;
+    border-radius: globals.$radius-sm;
+    background: globals.$darker-background-color;
+    color: globals.$muted-color;
+  }
+
+  &__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1 1 auto;
+    min-width: 0;
+
+    strong {
+      overflow: hidden;
+      color: globals.$light-color;
+      font-size: 12.5px;
+      font-weight: 500;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    small {
+      color: globals.$body-color;
+      font-size: 10.5px;
+      letter-spacing: 0.02em;
+    }
+  }
+
+  &__tools {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    flex: 0 0 auto;
+  }
+
+  &__tool {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    border: none;
+    border-radius: globals.$radius-sm;
+    background: transparent;
+    color: globals.$body-color;
+    cursor: pointer;
+    transition: background globals.$transition-fast, color globals.$transition-fast, transform globals.$transition-fast;
+
+    &:hover {
+      background: globals.$hover-button-background;
+      color: globals.$light-color;
+    }
+
+    &.is-open svg {
+      transform: rotate(180deg);
+    }
+
+    svg {
+      transition: transform globals.$transition-fast;
+    }
+  }
+
+  // ── Image ────────────────────────────────────────────────────────────────
+  &--image {
+    max-width: 400px;
+    margin: 0;
+    border-color: transparent;
+    background: transparent;
+
+    a {
+      display: block;
+      overflow: hidden;
+      border-radius: globals.$radius-sm;
+      line-height: 0;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      max-height: 320px;
+      border-radius: globals.$radius-sm;
+      object-fit: cover;
+      transition: opacity globals.$transition-fast;
+
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+
+    figcaption {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 2px 0;
+      color: globals.$body-color;
+      font-size: 10.5px;
+
+      span {
+        overflow: hidden;
+        flex: 1 1 auto;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      a {
+        display: flex;
+        color: globals.$body-color;
+
+        &:hover {
+          color: globals.$light-color;
+        }
+      }
+    }
+  }
+
+  // ── Video ────────────────────────────────────────────────────────────────
+  &--video {
+    max-width: 440px;
+    background: #050505;
+
+    video {
+      display: block;
+      width: 100%;
+      max-height: 300px;
+      background: #000;
+      outline: none;
+    }
+
+    .attachment__meta {
+      border-top: 1px solid globals.$border-color;
+    }
+  }
+
+  // ── Audio ────────────────────────────────────────────────────────────────
+  &--audio {
+    max-width: 400px;
+    padding: 8px 9px;
+
+    .attachment__audio-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+      min-width: 0;
+    }
+
+    .attachment__audio-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+      width: 30px;
+      height: 30px;
+      border-radius: globals.$radius-sm;
+      background: rgba(globals.$cyan-color, 0.12);
+      color: globals.$cyan-color;
+    }
+
+    audio {
+      display: block;
+      width: 100%;
+      height: 32px;
+      filter: invert(0.92) hue-rotate(180deg) saturate(0.2);
+    }
+  }
+
+  // ── Code ─────────────────────────────────────────────────────────────────
+  &--code {
+    max-width: 560px;
+    background: rgba(255, 255, 255, 0.015);
+
+    &.is-expanded .attachment__meta {
+      border-bottom: 1px solid globals.$border-color;
+    }
+
+    .code-preview {
+      border: none;
+      border-radius: 0;
+    }
+  }
+
+  // ── Generic file ─────────────────────────────────────────────────────────
+  &--file {
+    max-width: 340px;
+
+    &:hover {
+      border-color: globals.$hover-button-border;
+      background: globals.$hover-button-background;
+    }
+  }
+}

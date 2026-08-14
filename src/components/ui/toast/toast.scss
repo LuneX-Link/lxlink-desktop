@@ -1,0 +1,159 @@
+@use "@scss/globals.scss";
+
+.toast-container {
+  position: fixed;
+  bottom: 20px;
+  right: 16px;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  pointer-events: none;
+
+  > * {
+    pointer-events: auto;
+  }
+}
+
+.toast {
+  width: 320px;
+  background: #0a0a0a;
+  border: 1px solid globals.$border-color;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow:
+    0 10px 32px rgba(0, 0, 0, 0.5),
+    0 2px 8px rgba(0, 0, 0, 0.3);
+  animation: toast-slide-in 0.2s ease-out;
+
+  &--closing {
+    animation: toast-slide-out 0.15s ease-in forwards;
+  }
+
+  // ── Accent strip on the left ──
+  &__accent {
+    width: 3px;
+    align-self: stretch;
+    flex-shrink: 0;
+
+    .toast--success & { background: #34d399; }
+    .toast--error & { background: #dc2626; }
+    .toast--warning & { background: #eab308; }
+  }
+
+  // ── Content ──
+  &__content {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    padding: 10px 10px 10px 8px;
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .toast--success & {
+      background: rgba(34, 197, 94, 0.1);
+      color: #34d399;
+    }
+
+    .toast--error & {
+      background: rgba(220, 38, 38, 0.1);
+      color: #dc2626;
+    }
+
+    .toast--warning & {
+      background: rgba(234, 179, 8, 0.1);
+      color: #eab308;
+    }
+  }
+
+  &__text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    min-width: 0;
+  }
+
+  &__title {
+    font-size: 12px;
+    font-weight: 600;
+    color: globals.$muted-color;
+    line-height: 1.3;
+  }
+
+  &__message {
+    font-size: 11px;
+    color: globals.$body-color;
+    line-height: 1.35;
+  }
+
+  &__close {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    background: transparent;
+    border: none;
+    color: globals.$body-color;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    margin-top: 2px;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: globals.$muted-color;
+    }
+  }
+
+  // ── Progress bar ──
+  &__progress {
+    height: 2px;
+    background: rgba(255, 255, 255, 0.04);
+    overflow: hidden;
+  }
+
+  &__progress-bar {
+    height: 100%;
+    transition: width 0.05s linear;
+
+    .toast--success & { background: #34d399; }
+    .toast--error & { background: #dc2626; }
+    .toast--warning & { background: #eab308; }
+  }
+}
+
+// ── Animations ──
+@keyframes toast-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes toast-slide-out {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+}

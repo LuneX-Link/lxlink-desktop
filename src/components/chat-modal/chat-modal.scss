@@ -1,0 +1,451 @@
+@use "../../scss/globals.scss";
+
+// ─── Overlay ───────────────────────────────────────────────────────────
+.ncm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 80px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  animation: ncm-overlay-in 0.2s ease-out;
+
+  &--closing {
+    animation: ncm-overlay-out 0.2s ease-out forwards;
+  }
+}
+
+// ─── Panel ─────────────────────────────────────────────────────────────
+.ncm-panel {
+  width: 520px;
+  max-width: 90vw;
+  display: flex;
+  flex-direction: column;
+  background: globals.$dark-background-color;
+  border: 1px solid globals.$border-color;
+  border-radius: globals.$radius-md;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  animation: ncm-panel-in 0.25s ease-out;
+
+  .ncm-overlay--closing & {
+    animation: ncm-panel-out 0.2s ease-out forwards;
+  }
+
+  // ─── Search Bar ─────────────────────────────────────────────────────
+  &__search-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid globals.$border-color;
+  }
+
+  &__search-icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    flex-shrink: 0;
+  }
+
+  &__search-icon {
+    color: globals.$body-color;
+  }
+
+  &__search-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    font-weight: 500;
+    color: globals.$light-color;
+    font-family: inherit;
+
+    &::placeholder {
+      color: globals.$body-color;
+      font-weight: 400;
+    }
+  }
+
+  &__clear-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.06);
+    border: none;
+    color: globals.$body-color;
+    cursor: pointer;
+    transition: all globals.$transition-fast;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: globals.$light-color;
+    }
+  }
+
+  &__kbd-hint {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    kbd {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 22px;
+      height: 20px;
+      padding: 0 5px;
+      font-family: "SF Mono", "Fira Code", monospace;
+      font-size: 10px;
+      color: globals.$body-color;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid globals.$border-color;
+      border-radius: 4px;
+    }
+  }
+
+  // ─── Tabs ───────────────────────────────────────────────────────────
+  &__tabs {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 8px 12px;
+    border-bottom: 1px solid globals.$border-color;
+    background: rgba(255, 255, 255, 0.01);
+  }
+
+  &__tab {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    background: transparent;
+    border: 1px solid transparent;
+    color: globals.$body-color;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all globals.$transition-fast;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.04);
+      color: globals.$light-color;
+    }
+
+    &--active {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.1);
+      color: globals.$muted-color;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.08);
+      }
+    }
+  }
+
+  // ─── Content ────────────────────────────────────────────────────────
+  &__content {
+    flex: 1;
+    min-height: 180px;
+    max-height: 360px;
+    overflow-y: auto;
+    padding: 12px;
+
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 2px;
+    }
+  }
+
+  // ─── Body ───────────────────────────────────────────────────────────
+  &__body {
+    &--animated {
+      animation: ncm-body-in 0.25s ease-out;
+    }
+  }
+
+  // ─── Section ────────────────────────────────────────────────────────
+  &__section {
+    animation: ncm-slide-up 0.3s ease-out;
+  }
+
+  &__section-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: globals.$body-color;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 6px;
+    margin-bottom: 6px;
+  }
+
+  &__section-count {
+    margin-left: auto;
+    padding: 2px 8px;
+    font-size: 10px;
+    font-weight: 600;
+    color: globals.$muted-color;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+  }
+
+  // ─── List ───────────────────────────────────────────────────────────
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  // ─── Item ───────────────────────────────────────────────────────────
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: transparent;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all globals.$transition-fast;
+    text-align: left;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.06);
+
+      .ncm-panel__item-arrow {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    &--animated {
+      animation: ncm-item-slide 0.25s ease-out both;
+    }
+  }
+
+  &__item-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__item-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: globals.$muted-color;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__item-meta {
+    font-size: 11px;
+    color: globals.$body-color;
+  }
+
+  &__item-arrow {
+    opacity: 0;
+    color: globals.$body-color;
+    transform: translateX(-4px);
+    transition: all globals.$transition-fast;
+  }
+
+  // ─── Group Create ───────────────────────────────────────────────────
+  &__group-create {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+    animation: ncm-fade-in 0.3s ease-out;
+  }
+
+  &__group-icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid globals.$border-color;
+    margin-bottom: 16px;
+    color: globals.$body-color;
+    opacity: 0.6;
+  }
+
+  &__group-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: globals.$muted-color;
+    margin: 0 0 8px;
+  }
+
+  &__group-subtitle {
+    font-size: 13px;
+    color: globals.$body-color;
+    margin: 0 0 20px;
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  &__group-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: globals.$muted-color;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all globals.$transition-fast;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: globals.$light-color;
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+  }
+
+  // ─── Empty State ────────────────────────────────────────────────────
+  &__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+    animation: ncm-fade-in 0.3s ease-out;
+  }
+
+  &__empty-icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid globals.$border-color;
+    margin-bottom: 16px;
+    color: globals.$body-color;
+    opacity: 0.4;
+  }
+
+  &__empty-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: globals.$muted-color;
+    margin: 0 0 8px;
+  }
+
+  &__empty-subtitle {
+    font-size: 12px;
+    color: globals.$body-color;
+    margin: 0;
+    opacity: 0.7;
+  }
+}
+
+// ─── Animations ───────────────────────────────────────────────────────
+@keyframes ncm-overlay-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes ncm-overlay-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes ncm-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes ncm-panel-out {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+}
+
+@keyframes ncm-body-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ncm-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ncm-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes ncm-item-slide {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

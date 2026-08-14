@@ -1,0 +1,488 @@
+@use "../../scss/globals.scss";
+
+// ─── Modal ───────────────────────────────────────────────────────────
+.pm {
+  width: 440px;
+  max-width: 95vw;
+  background: globals.$dark-background-color;
+  border: 1px solid globals.$border-color;
+  border-radius: 12px;
+  overflow: hidden;
+  animation: pm-in 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.5),
+    0 4px 16px rgba(0, 0, 0, 0.3);
+
+  &--closing {
+    animation: pm-out 0.18s ease-out forwards;
+  }
+
+  // ─── Banner ─────────────────────────────────────────────────────
+  &__banner {
+    position: relative;
+    height: 84px;
+    background: globals.$profile-banner-gradient;
+    border-bottom: 1px solid globals.$border-color;
+    background-size: 200% 200%;
+    animation: pm-gradient 8s ease infinite;
+    overflow: hidden;
+  }
+
+  &__banner-shimmer {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 35%,
+      rgba(255, 255, 255, 0.07) 45%,
+      rgba(255, 255, 255, 0.1) 50%,
+      rgba(255, 255, 255, 0.07) 55%,
+      transparent 65%
+    );
+    background-size: 250% 100%;
+    animation: pm-shimmer 4s ease-in-out infinite;
+  }
+
+  &__close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all globals.$transition-fast;
+    backdrop-filter: blur(4px);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.15);
+      color: globals.$light-color;
+    }
+  }
+
+  // ─── Main ───────────────────────────────────────────────────────
+  &__main {
+    padding: 0 18px 14px;
+  }
+
+  // ─── Header ─────────────────────────────────────────────────────
+  &__header {
+    display: flex;
+    align-items: flex-end;
+    gap: 14px;
+    margin-top: -30px;
+    margin-bottom: 12px;
+  }
+
+  &__avatar-wrap {
+    flex-shrink: 0;
+    border: 3px solid globals.$dark-background-color;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  }
+
+  &__user-info {
+    flex: 1;
+    min-width: 0;
+    padding-bottom: 2px;
+  }
+
+  &__name-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 1px;
+  }
+
+  &__name {
+    font-size: 17px;
+    font-weight: 700;
+    color: globals.$light-color;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__pronouns {
+    font-size: 10px;
+    color: globals.$body-color;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 1px 6px;
+    border-radius: 6px;
+    font-style: italic;
+    flex-shrink: 0;
+  }
+
+  &__username {
+    font-size: 12px;
+    color: globals.$body-color;
+  }
+
+  // ─── Badges ─────────────────────────────────────────────────────
+  &__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 12px;
+  }
+
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    color: var(--badge-color, globals.$body-color);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    cursor: default;
+    transition: all 0.15s ease;
+
+    svg { flex-shrink: 0; }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.06);
+      transform: translateY(-1px);
+    }
+  }
+
+  // ─── Bio ────────────────────────────────────────────────────────
+  &__bio {
+    margin-bottom: 12px;
+  }
+
+  &__bio-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: globals.$body-color;
+    margin-bottom: 5px;
+    letter-spacing: 0.04em;
+  }
+
+  &__bio-text {
+    font-size: 12px;
+    color: globals.$muted-color;
+    line-height: 1.5;
+    margin: 0;
+    padding: 8px 10px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid globals.$border-color;
+    border-radius: 6px;
+  }
+
+  &__bio-input {
+    width: 100%;
+    padding: 8px 10px;
+    background: globals.$darker-background-color;
+    border: 1px solid globals.$border-color;
+    border-radius: 6px;
+    color: globals.$muted-color;
+    font-size: 12px;
+    font-family: inherit;
+    line-height: 1.5;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.15s ease;
+
+    &:focus {
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    &::placeholder {
+      color: globals.$body-color;
+    }
+  }
+
+  &__name-input {
+    font-size: 17px;
+    font-weight: 700;
+    color: globals.$light-color;
+    background: globals.$darker-background-color;
+    border: 1px solid globals.$border-color;
+    border-radius: 6px;
+    padding: 2px 8px;
+    outline: none;
+    width: 100%;
+    transition: border-color 0.15s ease;
+
+    &:focus {
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+  }
+
+  // ─── Divider ────────────────────────────────────────────────────
+  &__divider {
+    height: 1px;
+    background: globals.$border-color;
+    margin: 0 0 12px;
+  }
+
+  // ─── Stats ──────────────────────────────────────────────────────
+  &__stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+
+  &__stat {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid globals.$border-color;
+    border-radius: 7px;
+    transition: all 0.15s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.04);
+      transform: translateY(-1px);
+    }
+  }
+
+  &__stat-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    flex-shrink: 0;
+
+    &--cyan {
+      color: globals.$cyan-color;
+      background: rgba(globals.$cyan-color, 0.1);
+    }
+    &--green {
+      color: #23a55a;
+      background: rgba(35, 165, 90, 0.1);
+    }
+    &--purple {
+      color: #a78bfa;
+      background: rgba(167, 139, 250, 0.1);
+    }
+  }
+
+  &__stat-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  &__stat-value {
+    font-size: 13px;
+    font-weight: 700;
+    color: globals.$light-color;
+    line-height: 1.2;
+  }
+
+  &__stat-label {
+    font-size: 9px;
+    color: globals.$body-color;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  // ─── Activity ───────────────────────────────────────────────────
+  &__activity {
+    margin-bottom: 2px;
+  }
+
+  &__activity-header {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: globals.$body-color;
+    margin-bottom: 6px;
+    letter-spacing: 0.04em;
+
+    svg { color: globals.$muted-color; }
+  }
+
+  &__activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__activity-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 6px;
+    border-radius: 5px;
+    transition: background 0.1s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+  }
+
+  &__activity-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+
+    &--green { background: #23a55a; }
+    &--blue { background: #5865f2; }
+    &--yellow { background: globals.$warning-color; }
+  }
+
+  &__activity-text {
+    flex: 1;
+    font-size: 11px;
+    color: globals.$muted-color;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__activity-time {
+    font-size: 10px;
+    color: globals.$body-color;
+    flex-shrink: 0;
+  }
+
+  // ─── Actions ────────────────────────────────────────────────────
+  &__actions {
+    display: flex;
+    gap: 6px;
+    padding: 10px 18px 14px;
+    border-top: 1px solid globals.$border-color;
+    background: rgba(255, 255, 255, 0.01);
+  }
+
+  &__action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 34px;
+    padding: 0 12px;
+    border-radius: 7px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: globals.$body-color;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-size: 12px;
+    font-weight: 500;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(255, 255, 255, 0.1);
+      color: globals.$muted-color;
+    }
+
+    &--msg {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.06);
+      color: globals.$muted-color;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.07);
+        border-color: rgba(255, 255, 255, 0.1);
+        color: globals.$light-color;
+      }
+    }
+
+    &--off {
+      color: globals.$danger-color;
+      border-color: rgba(globals.$danger-color, 0.2);
+
+      &:hover {
+        background: rgba(globals.$danger-color, 0.08);
+        border-color: rgba(globals.$danger-color, 0.25);
+      }
+    }
+  }
+}
+
+// Context menus now use the shared `.amenu` component (src/components/ui/menu).
+
+// ─── Animations ───────────────────────────────────────────────────────
+
+@keyframes pm-in {
+  from { opacity: 0; transform: scale(0.96) translateY(8px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes pm-out {
+  from { opacity: 1; transform: scale(1) translateY(0); }
+  to   { opacity: 0; transform: scale(0.96) translateY(8px); }
+}
+
+@keyframes pm-gradient {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes pm-shimmer {
+  0%   { background-position: 250% 0; }
+  100% { background-position: -250% 0; }
+}
+
+// ─── Badges Info Section ──────────────────────────────────────────────
+.pm__badges-info {
+  margin-top: 12px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid globals.$border-color;
+  border-radius: 8px;
+}
+
+.pm__badges-info-header {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: globals.$body-color;
+  margin-bottom: 8px;
+  letter-spacing: 0.04em;
+}
+
+.pm__badges-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.pm__badge-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: globals.$muted-color;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: default;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
+  }
+}

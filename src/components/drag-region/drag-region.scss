@@ -1,0 +1,12 @@
+.drag-region {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 32px;
+  background-color: #000000;
+  z-index: 9998;
+  -webkit-app-region: drag;
+  app-region: drag;
+  pointer-events: auto;
+}

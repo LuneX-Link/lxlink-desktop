@@ -1,0 +1,143 @@
+@use "../../../scss/globals.scss";
+
+.acal {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid globals.$border-color;
+  border-radius: globals.$radius-md;
+  background: rgba(255, 255, 255, 0.02);
+
+  &__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+  }
+
+  &__nav {
+    display: flex;
+    width: 24px;
+    height: 24px;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: globals.$radius-sm;
+    background: transparent;
+    color: globals.$body-color;
+    cursor: pointer;
+    transition: color globals.$transition-fast, background globals.$transition-fast;
+
+    &:hover:not(:disabled) {
+      color: globals.$light-color;
+      background: globals.$hover-button-background;
+    }
+
+    &:disabled {
+      opacity: globals.$disabled-opacity;
+      cursor: not-allowed;
+    }
+  }
+
+  &__title {
+    flex: 1;
+    color: globals.$light-color;
+    font-size: 12.5px;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  &__year { color: globals.$body-color; font-weight: 500; }
+
+  &__weekdays,
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+  }
+
+  &__weekday {
+    padding-bottom: 2px;
+    color: rgba(globals.$body-color, 0.65);
+    font-size: 10px;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  &__cell {
+    display: flex;
+    height: 26px;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: globals.$radius-sm;
+    background: transparent;
+    color: globals.$muted-color;
+    font: inherit;
+    font-size: 11.5px;
+    cursor: pointer;
+    transition: color globals.$transition-fast, background globals.$transition-fast;
+
+    &:hover:not(&--disabled):not(&--blank) {
+      color: globals.$light-color;
+      background: globals.$hover-button-background;
+    }
+
+    &--blank { cursor: default; }
+
+    &--today {
+      color: globals.$light-color;
+      box-shadow: inset 0 0 0 1px rgba(globals.$cyan-color, 0.4);
+    }
+
+    &--selected,
+    &--selected:hover {
+      color: globals.$light-color;
+      background: globals.$cyan-color;
+      font-weight: 600;
+      box-shadow: none;
+    }
+
+    &--disabled {
+      opacity: 0.28;
+      cursor: not-allowed;
+    }
+  }
+
+  &__foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    padding-top: 6px;
+    border-top: 1px solid globals.$border-color;
+  }
+
+  &__action {
+    padding: 4px 8px;
+    border: 0;
+    border-radius: globals.$radius-sm;
+    background: transparent;
+    color: globals.$cyan-color;
+    font: inherit;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background globals.$transition-fast;
+
+    &:hover:not(:disabled) { background: rgba(globals.$cyan-color, 0.1); }
+
+    &--muted {
+      color: globals.$body-color;
+
+      &:hover:not(:disabled) { background: globals.$hover-button-background; }
+    }
+
+    &:disabled {
+      opacity: globals.$disabled-opacity;
+      cursor: not-allowed;
+    }
+  }
+}

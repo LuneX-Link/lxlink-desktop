@@ -1,0 +1,47 @@
+.incoming-call {
+  display: grid;
+  justify-items: center;
+  gap: 16px;
+  min-width: min(340px, calc(100vw - 64px));
+  padding: 8px 0 2px;
+}
+
+.incoming-call__signal {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.12));
+  border-radius: 8px;
+  color: var(--primary-color, #7ee787);
+  background: var(--background-secondary, rgba(255, 255, 255, 0.04));
+}
+
+.incoming-call__status {
+  margin: 0;
+  color: var(--text-secondary, #aeb3bd);
+  font-size: 14px;
+}
+
+.incoming-call__actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: 100%;
+
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 0;
+  }
+}
+
+.incoming-call__spinner {
+  animation: incoming-call-spin 0.8s linear infinite;
+}
+
+@keyframes incoming-call-spin {
+  to { transform: rotate(360deg); }
+}

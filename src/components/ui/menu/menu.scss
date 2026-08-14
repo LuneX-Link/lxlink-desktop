@@ -1,0 +1,192 @@
+@use "../../../scss/globals.scss";
+
+// Design taken from the chat header "Копировать ID / Показать файлы" menu,
+// with a slightly larger type scale. Shared by every context menu in the app.
+.amenu {
+  position: fixed;
+  z-index: 10050;
+  display: flex;
+  min-width: 190px;
+  max-width: 300px;
+  flex-direction: column;
+  padding: 4px;
+  border: 1px solid globals.$border-color;
+  border-radius: globals.$radius-md;
+  background: #070707;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.02);
+  animation: amenu-in 130ms ease-out;
+
+  // Hidden for the first paint while we measure it for viewport clamping.
+  &--measuring { opacity: 0; pointer-events: none; }
+
+  &__row { position: relative; }
+
+  &__item {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 9px;
+    padding: 8px 9px;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: globals.$body-color;
+    font: inherit;
+    font-size: 13px;
+    text-align: left;
+    cursor: pointer;
+    transition: color globals.$transition-fast, background globals.$transition-fast;
+
+    &:hover,
+    &--open {
+      color: globals.$light-color;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    &--active { color: globals.$light-color; }
+
+    &--danger {
+      color: globals.$body-color;
+
+      .amenu__icon { color: globals.$danger-color; }
+
+      &:hover {
+        color: globals.$danger-color;
+        background: rgba(globals.$danger-color, 0.1);
+      }
+    }
+
+    &--disabled {
+      opacity: globals.$disabled-opacity;
+      cursor: not-allowed;
+
+      &:hover { color: globals.$body-color; background: transparent; }
+    }
+  }
+
+  &__icon {
+    display: flex;
+    width: 16px;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: inherit;
+  }
+
+  &__label {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__shortcut {
+    flex-shrink: 0;
+    padding: 2px 5px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(globals.$body-color, 0.75);
+    font-size: 10px;
+    font-family: monospace;
+  }
+
+  &__check {
+    width: 6px;
+    height: 6px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: globals.$cyan-color;
+  }
+
+  &__arrow { flex-shrink: 0; color: rgba(globals.$body-color, 0.7); }
+
+  &__separator {
+    height: 1px;
+    margin: 4px 5px;
+    background: globals.$border-color;
+  }
+
+  &__header {
+    padding: 6px 9px 4px;
+    color: rgba(globals.$body-color, 0.7);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  // ── Reaction row ──────────────────────────────────────────────────────────
+  &__reactions {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 2px;
+  }
+
+  &__reaction {
+    display: flex;
+    width: 32px;
+    height: 32px;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 7px;
+    background: transparent;
+    color: globals.$body-color;
+    font-size: 17px;
+    line-height: 1;
+    cursor: pointer;
+    transition: transform globals.$transition-fast, background globals.$transition-fast, color globals.$transition-fast;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.07);
+      transform: scale(1.12);
+    }
+
+    &--active {
+      background: rgba(globals.$cyan-color, 0.14);
+      box-shadow: inset 0 0 0 1px rgba(globals.$cyan-color, 0.35);
+    }
+
+    &--action {
+      font-size: 0;
+
+      &:hover { color: globals.$light-color; }
+    }
+  }
+
+  // ── Submenu ───────────────────────────────────────────────────────────────
+  &__submenu {
+    position: absolute;
+    top: -4px;
+    left: calc(100% + 4px);
+    z-index: 1;
+    display: flex;
+    min-width: 180px;
+    max-height: 280px;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 4px;
+    border: 1px solid globals.$border-color;
+    border-radius: globals.$radius-md;
+    background: #070707;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.65);
+    animation: amenu-in 120ms ease-out;
+
+    &--up { top: auto; bottom: -4px; }
+
+    &::-webkit-scrollbar { width: 4px; }
+    &::-webkit-scrollbar-track { background: transparent; }
+    &::-webkit-scrollbar-thumb { border-radius: 2px; background: rgba(255, 255, 255, 0.09); }
+  }
+}
+
+@keyframes amenu-in {
+  from { opacity: 0; transform: scale(0.97) translateY(-3px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .amenu, .amenu__submenu { animation-duration: 1ms; }
+}

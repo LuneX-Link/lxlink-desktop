@@ -1,0 +1,103 @@
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #0a0a0a;
+  font-family: 'Noto Sans', -apple-system, sans-serif;
+  -webkit-app-region: drag;
+}
+
+.error-window {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 32px;
+  box-sizing: border-box;
+}
+
+.error-icon {
+  opacity: 0.9;
+}
+
+.error-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #f3f4f6;
+  margin: 0;
+  text-align: center;
+}
+
+.error-message {
+  width: 100%;
+  max-width: 320px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+  text-align: center;
+
+  p {
+    margin: 0;
+    font-size: 13px;
+    color: #6b7280;
+    line-height: 1.5;
+    word-break: break-word;
+  }
+}
+
+.error-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  -webkit-app-region: no-drag;
+}
+
+.error-btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: 1px solid transparent;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &--primary {
+    background: #dc2626;
+    color: white;
+    border-color: #dc2626;
+
+    &:hover:not(:disabled) {
+      background: #b91c1c;
+    }
+  }
+
+  &--secondary {
+    background: rgba(255, 255, 255, 0.04);
+    color: #9ca3af;
+    border-color: rgba(255, 255, 255, 0.08);
+
+    &:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.06);
+      color: #d1d5db;
+    }
+  }
+
+  &--ghost {
+    background: transparent;
+    color: #6b7280;
+    border-color: transparent;
+
+    &:hover:not(:disabled) {
+      color: #9ca3af;
+    }
+  }
+}

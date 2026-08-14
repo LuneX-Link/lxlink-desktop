@@ -1,0 +1,36 @@
+[package]
+name = "lxlink"
+version = "0.0.1"
+description = "LX Link - Real-time messaging client"
+authors = ["Ankerin"]
+license = ""
+repository = "https://github.com/LuneX-Link/lxlink-desktop"
+default-run = "lxlink"
+edition = "2021"
+rust-version = "1.70"
+
+[build-dependencies]
+tauri-build = { version = "2.0", features = [] }
+
+[dependencies]
+serde_json = "1.0"
+serde = { version = "1.0", features = ["derive"] }
+tauri = { version = "2.0", features = ["devtools"] }
+tauri-plugin-shell = "2.0"
+tauri-plugin-updater = "2.10.1"
+mdns-sd = "0.11"
+open = "5"
+tokio = { version = "1.48", features = ["rt-multi-thread", "sync", "time"] }
+livekit = "0.8.3"
+windows-capture = "2.0.1"
+
+[target.'cfg(target_os = "windows")'.dependencies]
+windows = { version = "0.61", features = [
+    "Win32_Graphics_Dwm",
+    "Win32_Foundation",
+    "Win32_UI_WindowsAndMessaging",
+] }
+
+[features]
+default = ["custom-protocol"]
+custom-protocol = ["tauri/custom-protocol"]

@@ -1,0 +1,53 @@
+@use "../../scss/globals.scss";
+
+.empty-state {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background: globals.$background-color;
+
+  &__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    max-width: 440px;
+    padding: 0 24px;
+    animation: ncm-fade-in 0.3s ease-out;
+  }
+
+  &__empty-icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 78px;
+    height: 78px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid globals.$border-color;
+    margin-bottom: 16px;
+    color: globals.$body-color;
+    opacity: 0.4;
+  }
+
+  &__empty-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: globals.$muted-color;
+    margin: 0 0 8px;
+  }
+
+  &__empty-subtitle {
+    font-size: 13px;
+    color: globals.$body-color;
+    margin: 0;
+    font-weight: 700;
+    opacity: 0.7;
+  }
+}

@@ -1,0 +1,25 @@
+@use "../../../scss/globals.scss";
+
+.apopover {
+  position: fixed;
+  z-index: 10045;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid globals.$border-color;
+  border-radius: globals.$radius-md;
+  background: #070707;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.02);
+  animation: apopover-in 140ms ease-out;
+
+  &--measuring { opacity: 0; pointer-events: none; }
+}
+
+@keyframes apopover-in {
+  from { opacity: 0; transform: scale(0.98) translateY(-4px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .apopover { animation-duration: 1ms; }
+}

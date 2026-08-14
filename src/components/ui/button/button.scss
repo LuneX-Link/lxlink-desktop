@@ -1,0 +1,68 @@
+@use "@scss/globals.scss";
+
+.button {
+  padding: globals.$spacing-unit globals.$spacing-unit * 2;
+  background-color: globals.$muted-color;
+  border-radius: 8px;
+  border: solid 1px transparent;
+  transition: all ease 0.2s;
+  cursor: pointer;
+  min-height: 40px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: globals.$spacing-unit;
+
+  &:active {
+    opacity: globals.$active-opacity;
+  }
+
+  &:disabled {
+    opacity: globals.$disabled-opacity;
+    cursor: not-allowed;
+  }
+
+  &--primary {
+    background-color: transparent;
+    border: solid 1px globals.$border-color;
+    color: globals.$muted-color;
+
+    &:hover {
+      background-color: globals.$hover-button-background;
+    }
+
+    &:disabled {
+      background-color: transparent;
+    }
+  }
+
+  &--outline {
+    background-color: transparent;
+    border: solid 1px globals.$border-color;
+    color: globals.$muted-color;
+
+    &:hover {
+      background-color: globals.$hover-button-background;
+    }
+
+    &:disabled {
+      background-color: transparent;
+    }
+  }
+
+  &--dark {
+    background-color: globals.$dark-background-color;
+    color: globals.$muted-color;
+  }
+
+  &--danger {
+    background: rgba(globals.$danger-color, 0.04);
+    border-color: rgba(globals.$danger-color, 0.15);
+    color: globals.$danger-color;
+
+    &:hover {
+      background: rgba(globals.$danger-color, 0.15);
+    }
+  }
+}

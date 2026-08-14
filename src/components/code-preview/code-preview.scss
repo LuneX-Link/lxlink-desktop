@@ -1,0 +1,45 @@
+@use "../../scss/globals.scss";
+
+.code-preview {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  border: 1px solid globals.$border-color;
+  border-radius: globals.$radius-sm;
+  background: #050505;
+
+  .monaco-editor,
+  .monaco-editor-background,
+  .monaco-editor .margin {
+    background: transparent;
+  }
+
+  // Read-only preview — kill leftover editing chrome.
+  .monaco-editor .cursors-layer {
+    display: none;
+  }
+
+  .monaco-editor .scroll-decoration {
+    box-shadow: none;
+  }
+
+  &--state {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 14px;
+    color: globals.$body-color;
+    font-size: 12px;
+  }
+
+  &__spinner {
+    animation: code-preview-spin 900ms linear infinite;
+  }
+}
+
+@keyframes code-preview-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

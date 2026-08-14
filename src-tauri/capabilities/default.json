@@ -1,0 +1,14 @@
+{
+  "identifier": "default",
+  "description": "Default permissions for the app",
+  "windows": ["main", "splashscreen"],
+  "permissions": [
+    "core:default",
+    "core:event:default",
+    "core:window:allow-close",
+    "core:window:allow-show",
+    "core:window:allow-hide",
+    "shell:allow-open",
+    "updater:default"
+  ]
+}

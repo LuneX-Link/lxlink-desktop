@@ -1,0 +1,40 @@
+# Dependencies and build output
+node_modules/
+dist/
+src-tauri/target/
+target/
+*.tsbuildinfo
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Local environment files
+.env
+.env.*
+!.env.example
+
+# Generated Tauri schemas
+src-tauri/gen/schemas/
+
+# Editor and OS files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Local agent notes and temporary files
+.mimocode/
+.claude/
+CLAUDE.md
+TASK.md
+TODO.md
+tmp_*
+*.tmp

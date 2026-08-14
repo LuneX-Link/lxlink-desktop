@@ -1,0 +1,271 @@
+@use "../../scss/globals.scss";
+
+.server-picker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  background-color: globals.$background-color;
+}
+
+.server-picker-card {
+  width: 100%;
+  max-width: 480px;
+  padding: globals.$spacing-unit * 5;
+  background-color: globals.$darker-background-color;
+  border: 1px solid globals.$border-color;
+  border-radius: 12px;
+
+  &__header {
+    text-align: center;
+    margin-bottom: globals.$spacing-unit * 4;
+  }
+
+  &__title {
+    font-size: 24px;
+    font-weight: 700;
+    color: globals.$muted-color;
+    margin-bottom: globals.$spacing-unit;
+  }
+
+  &__subtitle {
+    font-size: globals.$small-font-size;
+    color: globals.$body-color;
+  }
+
+  &__section {
+    margin-bottom: globals.$spacing-unit * 3;
+  }
+
+  &__section-title {
+    font-size: globals.$small-font-size;
+    font-weight: 500;
+    color: globals.$body-color;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: globals.$spacing-unit * 1.5;
+  }
+
+  &__scan-status {
+    display: flex;
+    align-items: center;
+    gap: globals.$spacing-unit;
+    font-size: globals.$small-font-size;
+    color: globals.$body-color;
+    margin-bottom: globals.$spacing-unit * 1.5;
+  }
+
+  &__spinner {
+    width: 14px;
+    height: 14px;
+    border: 2px solid globals.$border-color;
+    border-top-color: globals.$cyan-color;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  &__server-list {
+    display: flex;
+    flex-direction: column;
+    gap: globals.$spacing-unit;
+  }
+
+  &__server-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: globals.$spacing-unit * 2;
+    background-color: rgba(255, 255, 255, 0.02);
+    border: 1px solid globals.$border-color;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all ease 0.15s;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    &:active {
+      opacity: globals.$active-opacity;
+    }
+  }
+
+  &__server-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__server-name {
+    font-size: globals.$body-font-size;
+    font-weight: 500;
+    color: globals.$muted-color;
+  }
+
+  &__server-address {
+    font-size: globals.$small-font-size;
+    color: globals.$body-color;
+  }
+
+  &__server-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: globals.$small-font-size;
+  }
+
+  &__status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+
+    &--online {
+      background-color: globals.$success-color;
+      box-shadow: 0 0 6px globals.$success-color;
+    }
+
+    &--offline {
+      background-color: globals.$body-color;
+    }
+
+    &--checking {
+      background-color: globals.$warning-color;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+  }
+
+  &__status-text {
+    color: globals.$body-color;
+
+    &--online {
+      color: globals.$success-color;
+    }
+  }
+
+  &__divider {
+    display: flex;
+    align-items: center;
+    gap: globals.$spacing-unit * 2;
+    margin: globals.$spacing-unit * 3 0;
+    color: globals.$body-color;
+    font-size: globals.$small-font-size;
+
+    &::before,
+    &::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background-color: globals.$border-color;
+    }
+  }
+
+  &__manual-input {
+    display: flex;
+    gap: globals.$spacing-unit;
+  }
+
+  &__input {
+    flex: 1;
+    padding: globals.$spacing-unit * 1.5 globals.$spacing-unit * 2;
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px solid globals.$border-color;
+    border-radius: 8px;
+    color: globals.$muted-color;
+    font-size: globals.$body-font-size;
+    outline: none;
+    transition: border-color ease 0.15s;
+
+    &::placeholder {
+      color: globals.$body-color;
+    }
+
+    &:focus {
+      border-color: globals.$cyan-color;
+    }
+  }
+
+  &__connect-btn {
+    padding: globals.$spacing-unit * 1.5 globals.$spacing-unit * 3;
+    background-color: globals.$cyan-color;
+    color: globals.$light-color;
+    border: none;
+    border-radius: 8px;
+    font-size: globals.$body-font-size;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all ease 0.15s;
+    white-space: nowrap;
+
+    &:hover {
+      background-color: globals.$cyan-light;
+    }
+
+    &:active {
+      opacity: globals.$active-opacity;
+    }
+
+    &:disabled {
+      opacity: globals.$disabled-opacity;
+      cursor: not-allowed;
+    }
+  }
+
+  &__localhost-btn {
+    width: 100%;
+    padding: globals.$spacing-unit * 2;
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px solid globals.$border-color;
+    border-radius: 8px;
+    color: globals.$body-color;
+    font-size: globals.$small-font-size;
+    cursor: pointer;
+    transition: all ease 0.15s;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.12);
+      color: globals.$muted-color;
+    }
+
+    &:active {
+      opacity: globals.$active-opacity;
+    }
+  }
+
+  &__empty {
+    padding: globals.$spacing-unit * 3;
+    text-align: center;
+    font-size: globals.$small-font-size;
+    color: globals.$body-color;
+  }
+
+  &__error {
+    padding: globals.$spacing-unit * 1.5;
+    background-color: rgba(globals.$danger-color, 0.1);
+    border: 1px solid rgba(globals.$danger-color, 0.25);
+    border-radius: 8px;
+    color: globals.$danger-color;
+    font-size: globals.$small-font-size;
+    text-align: center;
+    margin-bottom: globals.$spacing-unit * 2;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
